@@ -30,7 +30,7 @@ A configuration is truly complete only when it is:
 
 ### Clear and Easy to Understand
 - Is the configuration must be understandable and maintainable for people other than the original author?
-- Does it include references to the original requirments that it is meant to satisfy?
+- Does it include references to the original requirements that it is meant to satisfy?
 - Is the configuration and well commented to help others track the logic and choices made by the author?
 
 ### Fully Tested
@@ -41,7 +41,7 @@ A configuration is truly complete only when it is:
 - Does the code benefit from reusable templates so that configurations can be written quickly
 - Does the code run efficiently so that it performs well over thousands of records
 
-Done in the Context of GAIN Studio
+Done in the Context of GAIN Studio - Checklist
 ----------------------------------
 A clear, tested and efficient configuration in GAIN has the following minimum criteria:
 
@@ -60,7 +60,7 @@ A clear, tested and efficient configuration in GAIN has the following minimum cr
 Incomplete Configuration
 ------------------------
 ### Issues in Incomplete Configuration
-- ![](/greenCheck.PNG) A single consolidated SpecFlow .feature file exists for this configuration
+- ![](/greenCheck.png) A single consolidated SpecFlow .feature file exists for this configuration
 - ![](/redX.png) SpecFlow .feature file exists, but is not connected to configuration rule
 
 	![Could Not Find](/couldNotFindTest.PNG)
@@ -77,27 +77,27 @@ Incomplete Configuration
 - ![](/redX.png) Tests failed due to SpecFlow scripting failure
 
 	![](/scriptingError.PNG)
-- ![](/greenCheck.PNG) Configuration code is clean is efficient
+- ![](/greenCheck.png) Configuration code is clean is efficient
 
 Complete Configuration
 ----------------------
-- ![](/greenCheck.PNG) A single consolidated SpecFlow .feature file exists for this configuration
-- ![](/greenCheck.PNG) The SpecFlow is associated directly to the configuration via GAIN Studio
-- ![](/greenCheck.PNG) The interpretation of the original business requirement is explicitly written in the SpecFlow
+- ![](/greenCheck.png) A single consolidated SpecFlow .feature file exists for this configuration
+- ![](/greenCheck.png) The SpecFlow is associated directly to the configuration via GAIN Studio
+- ![](/greenCheck.png) The interpretation of the original business requirement is explicitly written in the SpecFlow
 
 	![](/specFlowWithComment.PNG)
-- ![](/greenCheck.PNG) The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
+- ![](/greenCheck.png) The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
 
 	![](/configWithComment.PNG)
-- ![](/greenCheck.PNG) The SpecFlow contains sufficient realworld test cases, including cases with missing data
+- ![](/greenCheck.png) The SpecFlow contains sufficient realworld test cases, including cases with missing data
 
 	![](/testCases.PNG)
-- ![](/greenCheck.PNG) The test cases run in GAIN Studio with no SpecFlow scripting or blocking errors
-- ![](/greenCheck.PNG) All test cases PASS
+- ![](/greenCheck.png) The test cases run in GAIN Studio with no SpecFlow scripting or blocking errors
+- ![](/greenCheck.png) All test cases PASS
 
 	![](/passTests.PNG)
-- ![](/greenCheck.PNG) The configuration code controls for common sources of error
-- ![](/greenCheck.PNG) The configuration uses efficient methods such as Mapping to optomize execution speed
+- ![](/greenCheck.png) The configuration code controls for common sources of error
+- ![](/greenCheck.png) The configuration uses efficient methods such as Mapping to optomize execution speed
 
 \ GAIN Specific Coding Guidelines
 =================================
