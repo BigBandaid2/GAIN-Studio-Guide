@@ -7,16 +7,16 @@ A configuration is truly complete only when it is:
 - Fully Tested
 - Efficient
 
-###Clear and Easy to Understand###
+### Clear and Easy to Understand
 - Is the configuration must be understandable and maintainable for people other than the original author?
 - Does it include references to the original requirments that it is meant to satisfy?
 - Is the configuration and well commented to help others track the logic and choices made by the author?
 
-###Fully Tested###
+### Fully Tested
 - Has the configuration passed SpecFlow unit tests in GAIN Studio?
 - Are the tests comprehensive and include situations that are likely to cause errors?
 
-###Efficient###
+### Efficient
 - Does the code benefit from reusable templates so that configurations can be written quickly
 - Does the code run efficiently so that it performs well over thousands of records
 
