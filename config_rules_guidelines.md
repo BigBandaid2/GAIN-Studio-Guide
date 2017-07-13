@@ -1,6 +1,27 @@
 GAIN Studio Configurations Guide and Best Practices
 ===================================================
-Goal: Establish the Definition of Done
+How to use this guide
+---------------------
+This guide has three main parts:
+
+1. *Introduction* - A brief statement of purpose and some examples and complete and incomplete configurations
+2. *GAIN Best Practices Beyond Configuration Code* - Covers comments, documentation, and automated tests
+1. *GAIN Studio Coding Reference* - Templates and explanations for common rules types and scenarios
+
+### Introduction
+- We'll cover AIM Software's definition of a fully complete configuration in GAIN Studio
+- We'll show examples comparing a good complete configuration vs. an incomplete one
+
+### Best Practices
+- Non-technical checklist that can be followed to verify that the code is complete
+
+### GAIN Studio Coding Reference
+- Templates for common scenarios that can be copied and reused
+- Comparisons to incomplete configurations and explanations
+
+\ Introduction
+==============
+Goal: Establish the Definition of Complete
 --------------------------------------
 A configuration is truly complete only when it is:
 - Clear and Easy to Understand
@@ -20,13 +41,64 @@ A configuration is truly complete only when it is:
 - Does the code benefit from reusable templates so that configurations can be written quickly
 - Does the code run efficiently so that it performs well over thousands of records
 
-How to use this guide
----------------------
-This guide has two main parts:
-1. *GAIN Studio Coding Reference* - This includes templates and explanations for common rules types and scenarios. These templates apply methods that are most efficient in GAIN and control for common sources of error that can be inadvertently introduced in configuration rules
+Done in the Context of GAIN Studio
+----------------------------------
+A clear, tested and efficient configuration in GAIN has the following minimum criteria:
 
-2. *GAIN Best Practices Beyond Configuration Code* - Aside from functional and efficient configuration code, our goal is also to present a non-technical checklist that can be followed for each configuration to ensure that configurations are maintainable and testable going forward.
-	
+- A single consolidated SpecFlow .feature file exists for this configuration
+- The SpecFlow is associated directly to the configuration via GAIN Studio
+- The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow
+- The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
+- The SpecFlow contains sufficient test cases, including cases with missing data
+- The test cases run in GAIN Studio with no SpecFlow scripting or blocking errors
+- All test cases PASS
+- The configuration code controls for common sources of error
+- The configuration uses efficient methods such as Mapping to optomize execution speed
+
+\\ Example of a Configuration: BbgUniquId
+======================================
+Incomplete Configuration
+------------------------
+### Issues in Incomplete Configuration
+- ![](/greenCheck.PNG) A single consolidated SpecFlow .feature file exists for this configuration
+- ![](/redX.png) SpecFlow .feature file exists, but is not connected to configuration rule
+
+	![Could Not Find](/couldNotFindTest.PNG)
+- ![](/redX.png) No written intepretation of requirement in existing SpecFlow
+- ![](/redX.png) Few Test Cases, unrealistic data
+
+	![SpecFlow no comment](/specFlowNoComments.PNG)
+- ![](/redX.png) No comments on configuration
+
+	![](/incompleteBggUnique.PNG)
+- ![](/redX.png) Tests have all failed
+
+	![](/testsFailed.PNG)
+- ![](/redX.png) Tests failed due to SpecFlow scripting failure
+
+	![](/scriptingError.PNG)
+- ![](/greenCheck.PNG) Configuration code is clean is efficient
+
+Complete Configuration
+----------------------
+- ![](/greenCheck.PNG) A single consolidated SpecFlow .feature file exists for this configuration
+- ![](/greenCheck.PNG) The SpecFlow is associated directly to the configuration via GAIN Studio
+- ![](/greenCheck.PNG) The interpretation of the original business requirement is explicitly written in the SpecFlow
+
+	![](/specFlowWithComment.PNG)
+- ![](/greenCheck.PNG) The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
+
+	![](/configWithComment.PNG)
+- ![](/greenCheck.PNG) The SpecFlow contains sufficient realworld test cases, including cases with missing data
+
+	![](/testCases.PNG)
+- ![](/greenCheck.PNG) The test cases run in GAIN Studio with no SpecFlow scripting or blocking errors
+- ![](/greenCheck.PNG) All test cases PASS
+
+	![](/passTests.PNG)
+- ![](/greenCheck.PNG) The configuration code controls for common sources of error
+- ![](/greenCheck.PNG) The configuration uses efficient methods such as Mapping to optomize execution speed
+
 \ GAIN Specific Coding Guidelines
 =================================
 Guideline Structure
@@ -471,7 +543,7 @@ return Lookups.FTIOClasses.GetItemById(ftIOClass);
 // requirements that dictate a rule does not need to run. Better for the rule to rule and return null or existing value
 // that for the rule to not run at all without total confidence that it's not needed
 // Run condition considering more than the source source value of the current field must point to a spec flow requirement dictating this behavior
-// Don’t put complex rules in the run conditions, as they are supposed to be used as precalculation. They should be fast.
+// Donâ€™t put complex rules in the run conditions, as they are supposed to be used as precalculation. They should be fast.
 
 // Using run conditions may speed up the process, as it can block a rule from running (important by complex rules).
 
@@ -497,7 +569,7 @@ return Lookups.FTIOClasses.GetItemById(ftIOClass);
 
 # Usings
 // Remember that usings can be only normalized, never derived (underlying, issuer).
-// Remember there’s no selection rules for usings. Usings are never overriden. If it’s set to a non null value, it will stay like this ?
+// Remember thereâ€™s no selection rules for usings. Usings are never overriden. If itâ€™s set to a non null value, it will stay like this ?
 // The validation rules for using should be done at the entity level (i.e. issuer should be validated in the validation rule for the whole instrument).
 // The normalization/derivation of components must be done as a child derivation of a parent class (example: ratings, schedules).
 
