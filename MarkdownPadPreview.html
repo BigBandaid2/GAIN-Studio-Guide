@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>config_rules_guidelines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+<base href='file:\\\C:\TFS\Aim.Prod\Documentation\Graphics\GAIN5\Studio\BestPractices\'/>
+</head>
+<body>
+<h1>GAIN Studio Configurations Guide and Best Practices</h1>
+<h2>How to use this guide</h2>
+<p>This guide has three main parts:</p>
+<ol>
+<li><em>Introduction</em> - A brief statement of purpose and some examples and DONE and incomplete configurations</li>
+<li><em>GAIN Best Practices Checklist</em> - Covers comments, documentation, and automated tests</li>
+<li><em>GAIN Studio Coding Reference</em> - Templates and explanations for common rules types and scenarios</li>
+</ol>
+<h3>Introduction</h3>
+<ul>
+<li>We'll cover AIM Software's definition of a fully complete configuration in GAIN Studio</li>
+<li>We'll show examples comparing a good complete configuration vs. an incomplete one</li>
+</ul>
+<h3>Best Practices Checklist</h3>
+<ul>
+<li>Non-technical checklist that can be followed to verify that the code is complete</li>
+</ul>
+<h3>GAIN Studio Coding Reference</h3>
+<ul>
+<li>Templates for common scenarios that can be copied and reused</li>
+<li>Comparisons to incomplete configurations and explanations</li>
+</ul>
+<h1>\ Introduction</h1>
+<h2>Goal: Establish the Definition of Complete</h2>
+<p>A configuration is truly complete only when it is:</p>
+<ul>
+<li>Clear and Easy to Understand</li>
+<li>Fully Tested</li>
+<li>Efficient</li>
+</ul>
+<h3>Clear and Easy to Understand</h3>
+<ul>
+<li>Is the configuration must be understandable and maintainable for people other than the original author?</li>
+<li>Does it include references to the original requirements that it is meant to satisfy?</li>
+<li>Is the configuration and well commented to help others track the logic and choices made by the author?</li>
+</ul>
+<h3>Fully Tested</h3>
+<ul>
+<li>Has the configuration passed SpecFlow unit tests in GAIN Studio?</li>
+<li>Are the tests comprehensive and include situations that are likely to cause errors?</li>
+</ul>
+<h3>Efficient</h3>
+<ul>
+<li>Does the code benefit from reusable templates so that configurations can be written quickly</li>
+<li>Does the code run efficiently so that it performs well over thousands of records</li>
+</ul>
+<h2>Done in the Context of GAIN Studio - Checklist</h2>
+<p>A clear, tested and efficient configuration in GAIN has the following minimum criteria:</p>
+<ol>
+<li>A single consolidated SpecFlow .feature file exists for this configuration</li>
+<li>The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow</li>
+<li>The SpecFlow is associated directly to the configuration via GAIN Studio</li>
+<li>The configuration has comments pointing to corresponding sections of the the SpecFlow for reference</li>
+<li>The SpecFlow contains sufficient test cases, including cases with missing data</li>
+<li>The test cases run in GAIN Studio with no SpecFlow scripting or blocking errors</li>
+<li>All test cases PASS</li>
+<li>The configuration code handles common sources of error [See Checklist of Common Errors]</li>
+<li>The configuration uses efficient methods such as Mapping to optimize execution speed</li>
+<li>Configuration has been checked by a second team member</li>
+</ol>
+<h1>\ Example of a Configuration: BbgUniquId</h1>
+<h2>Complete Configuration - Best Practice</h2>
+<ul>
+<li><img src="../greenCheck.png" /> A single consolidated SpecFlow .feature file exists for this configuration</li>
+<li><img src="../greenCheck.png" /> The SpecFlow is associated directly to the configuration via GAIN Studio</li>
+<li>
+<p><img src="../greenCheck.png" /> The interpretation of the original business requirement is explicitly written in the SpecFlow</p>
+<p><img src="../specFlowWithComment.PNG" /></p>
+</li>
+<li>
+<p><img src="../greenCheck.png" /> The configuration has comments pointing to corresponding sections of the the SpecFlow for reference</p>
+<p><img src="../configWithComment.PNG" /></p>
+</li>
+<li>
+<p><img src="../greenCheck.png" /> The SpecFlow contains sufficient realworld test cases, including cases with missing data</p>
+<p><img src="../testCases.PNG" /></p>
+</li>
+<li><img src="../greenCheck.png" /> The test cases run in GAIN Studio with no SpecFlow scripting or blocking errors</li>
+<li>
+<p><img src="../greenCheck.png" /> All test cases PASS</p>
+<p><img src="../passTests.PNG" /></p>
+</li>
+<li><img src="../greenCheck.png" /> The configuration code controls for common sources of error</li>
+<li><img src="../greenCheck.png" /> The configuration uses efficient methods such as Mapping to optomize execution speed</li>
+</ul>
+<h2>Incomplete Configuration</h2>
+<h3>Issues in Incomplete Configuration</h3>
+<ul>
+<li>
+<p><img src="../greenCheck.png" /> A single consolidated SpecFlow .feature file exists for this configuration</p>
+<p><img src="../singleTest.png" /></p>
+</li>
+<li>
+<p><img src="../redX.png" /> SpecFlow .feature file exists, but is not connected to configuration rule</p>
+<p><img src="../couldNotFindTest.PNG" alt="Could Not Find" /></p>
+</li>
+<li><img src="../redX.png" /> No written intepretation of requirement in existing SpecFlow</li>
+<li>
+<p><img src="../redX.png" /> Few Test Cases, unrealistic data</p>
+<p><img src="../specFlowNoComments.PNG" alt="SpecFlow no comment" /></p>
+</li>
+<li>
+<p><img src="../redX.png" /> No comments on configuration</p>
+<p><img src="../incompleteBggUnique.PNG" /></p>
+</li>
+<li>
+<p><img src="../redX.png" /> Tests have all failed</p>
+<p><img src="../testsFailed.PNG" /></p>
+</li>
+<li>
+<p><img src="../redX.png" /> Tests failed due to SpecFlow scripting failure</p>
+<p><img src="../scriptingError.PNG" /></p>
+</li>
+<li><img src="../greenCheck.png" /> Configuration code is clean is efficient</li>
+</ul>
+<h1>\ Best Practices Checklist</h1>
+<h2>Checklist Overview</h2>
+<p>This section will provide a non-technical guide for configurations based on a checklist</p>
+<ul>
+<li>Every configuration should pass the checklist before sign-off on the configuration rule</li>
+<li>A significant focus of this checklist will be documentation and preparing automated tests</li>
+<li>Code efficiency and error control will be kept at a minimum in this section, reserved for 'Coding Guidelines'</li>
+</ul>
+<h2>Checklist Structure</h2>
+<p>Each checklist item will contain</p>
+<ul>
+<li>An explanation of this step's purpose</li>
+<li>One or more examples of configurations that PASS this checklist item</li>
+<li>A list of common failure scenarios</li>
+<li>Supporting material or references to the core GAIN Studio documentation. </li>
+</ul>
+<h2>Checklist Items</h2>
+<ol>
+<li>A single consolidated SpecFlow .feature file exists for this configuration</li>
+<li>The SpecFlow is associated directly to the configuration via GAIN Studio</li>
+<li>The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow</li>
+<li>The configuration has comments pointing to corresponding sections of the the SpecFlow for reference</li>
+<li>The SpecFlow contains sufficient test cases, including cases with missing data</li>
+<li>The test cases run in GAIN Studio with no SpecFlow scripting or blocking errors</li>
+<li>All test cases PASS</li>
+<li>The configuration code controls for common sources of error</li>
+<li>The configuration uses efficient methods such as Mapping to optomize execution speed</li>
+<li>Configuration has been checked by a second team member</li>
+</ol>
+<h1>\ A Single SpecFlow File Exists in Test Folders</h1>
+<h2>Purpose</h2>
+<p>If there is more than one .feature file for a single configuration, there's a danger of confusion and conflict. No file and No tests or requirements is also bad. </p>
+<h2>PASS Example</h2>
+<ol>
+<li>Navigate to Text Explorer</li>
+<li>Type the name of the configuration's model field into the 'Filter' bar</li>
+<li>Look for the one set of tests to appear for this transformation step and this model field</li>
+</ol>
+<p><img src="../singleTest.png" /></p>
+<h2>Common Failure Scenarios</h2>
+<ul>
+<li>
+No SpecFlows Exist 
+<ul>
+<li>Solution: [generate a specflow]</li>
+</ul>
+</li>
+<li>
+More than one test exist 
+<ul>
+<li>Solution: [consolidate specflows]</li>
+</ul>
+</li>
+</ul>
+<h1>\ The SpecFlow and Configuration Rule are Associated</h1>
+<h2>Purpose</h2>
+<p>If the SpecFlow file exists but is not associated, you have two problems:</p>
+<ul>
+<li>You can't jump quickly from the configuration rule to the SpecFlow</li>
+<li>The SpecFlow may not function correctly and may be imporperly tagged</li>
+</ul>
+<p>The SpecFlow .feature files serve as both the functional requirement documentation and unit-level test for each configuration rule. This is important for both review, maintainance and testing.</p>
+<p><strong>Maintenance</strong> Without an associated SpecFlow in GainStudio, it is impossible to trace the configuration back to specific requirements making maintenance and verification impossible</p>
+<p><strong>Testing</strong> A SpecFlow must be associated to run individual configuration level unit tests in GAIN Studio. These test are much faster to run than tests involving full instrument creation and tranformation, and provide error messages and debugging.</p>
+<h2>Walkthrough</h2>
+<h3>Step 1 - 'Jump to Test'</h3>
+<p>The fastest way to check if an associated test exists is to right-click on the configuration rule in question and click 'Jump to Test'. After a few seconds, the associated .feature file will be opened or you will find recieve a <em>Could not find related test</em> message.</p>
+<p>![jumpToTest.png]
+![couldNotFind.png]</p>
+<blockquote>
+<p><strong>PASS/FAIL</strong></p>
+<p>IF .feature file opens, Check 1 
+THEN PASSED</p>
+<p>ELSE, move to Step 2 - Search for Tests</p>
+</blockquote>
+<h3>Step 2 - Search for Tests and Consolidate</h3>
+<p>Often there are existing tests in the Test Explorer folder. If multiple exist for the same configuration, these tests should be consolidated to one .feature file and associated to the target configuration.</p>
+<p>[Search for test instruction][Search for feature test]</p>
+<p>??? How to associate with an existing test case</p>
+<blockquote>
+<p><strong>PASS/FAIL</strong></p>
+<p>IF there one .feature file in the correct folder corresponding to this configuration
+THEN PASSED</p>
+<p>Else, move to Step 3 - Generate Test</p>
+</blockquote>
+<h3>Step 3 - Generate Test</h3>
+<p>If no associated test is found, you should use 'Generate Test' to create a new feature file. GAIN Studio's 'Generate Test' feature is preferable to copying feature files into a test folder for the following reasons:
+- .feature file will automatically be correctly associated, placed into the correct folder
+- The correct Given, When, and Then commands will be automatically generated based on the Model and Configuration with no danger of mispellings or other user errors
+- Any variables used in the configuration logic, will also automatically appear with no risk of user error</p>
+<p>To create a test for a specific field:
+1. Open the transformation and locate the field.
+2. Open the context menu of the field in the transformation target window and select Generate test:</p>
+<p>![generateTest.png]
+![generatedSpecFlow.png]</p>
+<ol>
+<li>Fill out a test case, input and output should be the same, remove Process Context if it is not used in the current rule</li>
+<li>Delete and type '|' on the last pipe of the table, this will auto-format and align the columns to make more readable test cases</li>
+</ol>
+<p>[Further Guidance on Generating Tests]</p>
+<h1>\ Check 2 - Does the SpecFlow Run Without Errors</h1>
+<h2>Purpose</h2>
+<p>The first step of implementing a new automated SpecFlow is the ensure that all inputs and outputs register correctly, and the correct model is used, and that no breaking errors are triggered in the current configuration or any of the configurations that precede it.</p>
+<p>The objective of this check is not to Pass tests, but simply that the test script produces a testable output. It is critical the perform this check in order to seperate test failures caused by incomplete configuration vs. test failures caused by incomplete SpecFlow setup.</p>
+<h2>Walkthrough</h2>
+<h3>Step 1 - Run the SpecFlow in Test Explorer</h3>
+<p>Run the SpecFlow in Test Explorer and Check that expected inputs, outputs and models are registering in the test.
+1. [Search for feature test]
+2. [Run feature tests]
+3. Test cases will likely fail, right click a failed test and select 'Test Output'. Check that all fields are appearing correctly and there are no run-time errors.</p>
+<p>![checkTestOutput.png]</p>
+<h3>Step 2 - Check Test Output that expected inputs, outputs and models are registering in the test with no errors</h3>
+<blockquote>
+<p><strong>PASS/FAIL</strong>
+IF test succeeds
+OR
+IF no errors are displayed 
+AND all input fields in the Given section are populated 
+AND the output field in the Then section is populated
+THEN PASSED</p>
+<p>ELSE, move to Step 3 - Troubleshoot errors</p>
+</blockquote>
+<ul>
+<li>Potential errors: {Model doesn't exist, field not appearing, field appears as placeholder}</li>
+<li>[Test Output Common Errors and Messages]</li>
+</ul>
+<p>![</p>
+<p>The SpecFlow</p>
+<h1>\ GAIN Specific Coding Guidelines</h1>
+<h2>Guideline Structure</h2>
+<p>Each page in this section will cover a common scenario, provide a code template or example, and explain the reasoning for the recommended method. This section will assume basic familiarity with programming terminology and concepts.</p>
+<p>Beyond this three part structure, further reading and explaination for the feature will refer to the core GAIN Studio guide documentation.</p>
+<h1>\ Guiding Principles for Configuration Best Practices</h1>
+<h2>Four goals of defining and following best practices</h2>
+<p>GAIN Studio allows people with a broad spectrum of business and technical skills to have an unprecedented level
+of access, control, and customizability to the rules that define business process behavior within the GAIN ecosystem.</p>
+<p>However, this flexibility also means that there are more opportunities for confusion and sub-optimal code to be introduced
+to live production systems causing unexpected errors or a headache for maintenance down the road.</p>
+<p>Our goal for this guide is to help put all team members writing configuration rules for on the same footing by providing
+a basic set of coding standards, testing requirements, and documentation language so that every configuration rule
+written in GAIN achieves the following important criteria:</p>
+<ol>
+<li>
+<h3>Dependable</h3>
+The configuration must be functional and resilient, accounting for common issues such as missing data that can create errors.
+</li>
+<li>
+<h3>Maintainable</h3>
+The configuration must be understandable and maintainable for people other than the original author. Every configuration must
+include references to the requirments that it is meant to satisfy and well commented to help other track the logic and choices
+made by the authors.
+</li>
+<li>
+<h3>Testable</h3>
+Every new configuration must be accompanied by unit (rule) level tests to valid that the rule is working correctly.
+These test should be formatted such that they can be excuted by GAIN Studio's built in testing suite.
+</li>
+<li>
+<h3>Efficient</h3>
+Finally, rules should be written so that perform efficiently. Every implementation includes hundreds of rules which must
+run again thousands of records regularly. As a result small tweaks that optimize code performance can have major rewards.
+</li>
+</ol>
+<p>Throughout the remainder of this guide. We will refer back to these four goals to provide context and motivation for 
+each best practice suggestion.</p>
+<h1>\ Configuration Examples</h1>
+<p>This section of the guide will provide a series of detailed walkthroughs covering configurations and testing for rules in GAIN Studio.
+The examples will begin with the very simple and increase in complexity with a goal of introducing a few new best practices in each.</p>
+<h2>Example Series:</h2>
+<h3>Simple 1:1 Mapping</h3>
+<p><strong>Description:</strong> Straight forward 1 input to 1 output mapping with no documented requirements and no transformation logic.</p>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li>Generating a SpecFlow Automated Test</li>
+<li>Adding test data to an automated test case</li>
+<li>Running Automated tests with Test Explorer</li>
+<li>Basic Commenting in the configuration rule</li>
+<li>Basic Commenting in the test case</li>
+</ul>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Field already exists in the AIM model</li>
+<li>One input, One output</li>
+<li>No Run Condition</li>
+<li>
+<p>Simple If...Else Transformation</p>
+</li>
+<li>
+<p>Declaring and Assigning Variables
+Translating Functional Requirements to Automation
+Writing Your First Transformation Logic</p>
+</li>
+</ul>
+<h1>Links</h1>
+<p>Baseline Rule Minimum Requirement (1:1 Rule)
+Basic Rule With Spec Flow Requirements
+Basic Rule With Lookup</p>
+<h1>\ Components</h1>
+<h1>Links</h1>
+<p>If...Else
+Lookups</p>
+<h1>\ Baseline 1:1 Rule Minimum Requirement</h1>
+<p>BbgUniqueId</p>
+<ul>
+<li>Field exist in AIM Model</li>
+<li>One input, one output, string</li>
+<li>No Run Condition</li>
+<li>No Transformation Logic</li>
+<li>No pre-existing SpecFlow or requirments</li>
+</ul>
+<p>Step 1. Drag the desired source field to the desired target field
+- [Dependable] This will create a single line of code</p>
+<h1>code example</h1>
+<p>return Source.SecurityIdentifiers.ID<em>BB</em>UNIQUE;</p>
+<h1>end code example</h1>
+<p>Step 2. Generate an Automated Test
+- [Testable] Once all variables are declared, save and right-click in the transform model -&gt; Generate Test
+	- this will produce a SpecFlow Template associated with the field, using all correct parameters and variables
+	- if an implemented SpecFlow already exists, this will open to correct file so that duplicates are not created
+- [Testable] Fill out a test case, input and output should be the same, remove Process Context as this in not used in the current rule
+- [Maintainable] Delete and type '|' on the last pipe of the table, this will auto-format and align the columns to make more readable test cases</p>
+<h1>screenshot - SpecFlow</h1>
+<ul>
+<li>[Maintainable] Add comment to the transformation rule referring to the Scenario Outline in the automated test case</li>
+</ul>
+<h1>code example</h1>
+<p>// Begin Rule
+// Corresponds to reqs and tests in Scenario Outline: BbgUniqueId</p>
+<h1>end code example</h1>
+<p>Step 3. Run Test
+- [Functional] Check that all test cases pass, if not adjust the transformation or test cases accordingly</p>
+<p>Step 4. Place final comments on test
+- [Maintainable] Summarize the logic of the transformation rule if not already written in SpecFlow
+	- write the interpretation and logic summary under the Scenario Outline
+- [Maintainable] Tag the spec flow with the team that reviewed and implemented so that it can be traced back
+	- tags: {defined, cleaned, implemented, signedOff}
+	- examples: {AIM-implemented, FT-defined, Sapient-signedOff}</p>
+<h1>screenshot - final SpecFlow</h1>
+<h1>Second Example</h1>
+<p>Martial's current 1:1 rule text</p>
+<h1>\ Basic Rule With Spec Flow Requirements</h1>
+<h2>ISIN</h2>
+<ul>
+<li>Field already exists in the AIM model</li>
+<li>One input, One output</li>
+<li>No Run Condition</li>
+<li>Simple If...Else Transformation</li>
+</ul>
+<p>Step 1. Refer to spec flow and interpret the requirement
+- [Maintainable] Summarize the logic of the transformation rule if not already written in SpecFlow
+	- write the interpretation and logic summary under the Scenario Outline
+- [Maintainable] Tag the spec flow with the team that reviewed and implemented so that it can be traced back
+	- tags: {defined, cleaned, implemented, signedOff}
+	- examples: {AIM-implemented, FT-defined, Sapient-signedOff}</p>
+<p>Step 2. Generate an Automated Test
+Step 3. Translate First Scenario Outline to the Generated SpecFlow
+- [Testable] Move the header up to Scenario Outline and interpreted explanation, above 'Given data...' line from requirement SpecFlow to automated SpecFlow
+	- This retains the generated fields and prevents automation errors from mispellings, etc.
+	- Remove Process Context inputs if not used
+- [Testable] Copy/Paste the Test Case lines (keep the generate column headings) and realign the data columns
+	- This prevents the test case field headings from becoming misaligned with the expected inputs
+	- Care must be taken the align the test data with the correct headings
+	- At the end, delete the last pipe in any line and type '|' again to activate auto-formatting the straighten columns</p>
+<p>Step 4. Run the SpecFlow in Test Explorer and Check that expected inputs, outputs and models are registering in the test
+- [Testable] Test cases should all fail, right click a failed test and select 'Test Output'. Check that all fields are appearing correctly and there are no run-time errors
+- [Testable] Potential errors: {Model doesn't exisit, field not appearing, field appears as placeholder}
+	- Link to list of errors</p>
+<p>Step 5. Write Your Cofiguration Rule Logic
+- [Maintainable] Comment the code block with a reference to the Test Scenario Outline that it is based on</p>
+<h1>code example</h1>
+<p>// Begin Configuration Rule
+// Corresponds to reqs and test in Scenario Outline: ISIN </p>
+<h1>end code example</h1>
+<ul>
+<li>[Dependable] For ISIN, write and solid If...Else statement</li>
+</ul>
+<h1>code example</h1>
+<p>if (idIsin == &quot;N.A.&quot;)
+	return null;
+else
+	return idIsin;</p>
+<h1>end code example</h1>
+<ul>
+<li>[Dependable] For more on writing good If...Else statements, refer to here [link: IF...ELSE]</li>
+</ul>
+<p>Step 6. Run the SpecFlow in Test Explorer
+- [Dependable] Check that all test cases pass, if not adjust the transformation
+- [Testable] If a test fails because the test case has errors, comment out the test case or make adjustments. 
+	- Always leave a comment on adjusted test cases and mark with '#?' so that it can be readily found and reviewed
+- [Maintainable] Consolidate and clean out redundant or inactive Spec Flows so that only one SpecFlow exists for each transformation step of each field</p>
+<h1>Basic Rule With Lookup</h1>
+<p>CountryOfRisk</p>
+<ul>
+<li>Field already exists in the AIM model</li>
+<li>Two inputs, One output</li>
+<li>No Run Condition</li>
+<li>If...Else Condition + Return Lookup Value</li>
+</ul>
+<p>Step 1. Refer to spec flow and interpret the requirement
+Step 2. Declare and assign all variables 
+- [Maintainable] Begin the transformation block with all variables that will be used so that they are easy to see at a glance, end with a simple return of a declared variable</p>
+<h1>code example</h1>
+<p>// Declare and assign variables
+	// String
+var idIsin = Source.SecurityIdentifiers.ID_ISIN;
+	return idIsin;</p>
+<h1>end code example</h1>
+<ul>
+<li>
+[Testable] Once all variables are declared, save and right-click in the transform model -&gt; Generate Test
+<ul>
+<li>this will produce a SpecFlow Template associated with the field, using all correct parameters and variables</li>
+<li>if an implemented SpecFlow already exists, this will open to correct file so that duplicates are not created
+Step 3. Translate First Scenario Outline to the Generated SpecFlow</li>
+</ul>
+</li>
+<li>[Testable] Here the SpecFlow must be cleaned to create testable cases. Each field can only contain one value
+Step 4. Run the SpecFlow in Test Explorer and Check that expected inputs, outputs and models are registering in the test
+Step 5. Write Your Cofiguration Rule Logic</li>
+<li>[Dependable]</li>
+</ul>
+<h1>More</h1>
+<h1>Declare and assign commonly used variables. Convert values to strings for easier exception handling</h1>
+<p>// Validate all fields at the top of the rule
+// Assign all inputs to a local camelCase version of the variable
+// Organize lookups, strings, decimal, integer, Boolean, and variables from joined objects
+// Lookups should be assigned to a string of their reference code or &quot;&quot; if null</p>
+<h1>Code template</h1>
+<p>// Declare and assign variables
+	// Output
+var countryOfListing = &quot;&quot;;
+	// Lookups
+var exchange = Source.Exchange != null ? Source.Exchange.ReferenceCode : &quot;&quot;;
+var ftIOClass = Source.FTIOClass != null ? Source.FTIOClass.ReferenceCode : &quot;&quot;;
+var ftSecurityType = Source.FTSecurityType != null ? Source.FTSecurityType.ReferenceCode : &quot;&quot;;
+var issueCurrency = Source.IssueCurrency != null ? Source.IssueCurrency.ReferenceCode : &quot;&quot;;
+var securityCountryOfIncorporation = Source.SecurityCountryOfIncorporation != null ? Source.SecurityCountryOfIncorporation.ReferenceCode : &quot;&quot;;
+var couponType = Source.CouponType != null ? Source.CouponType.ReferenceCode : &quot;&quot;;
+	// Joined
+var underlying_countryOfListing = (Source.Underlying != null &amp;&amp; Source.Underlying.CountryofListing != null) ? Source.Underlying.CountryofListing.ReferenceCode : &quot;&quot;;
+var maturity = Source.DescriptiveInfo != null &amp;&amp; Source.DescriptiveInfo.MATURITY.HasValue ? Source.DescriptiveInfo.MATURITY : null;
+	// Decimal
+var parValue = Source.ParValue;
+var couponRate = Source.CouponRate;
+	// Boolean
+var isRegS = Source.IsRegS.HasValue ? (bool ?)Source.IsRegS.Value : null;
+var is144A = Source.Is144A.HasValue ? (bool ?)Source.Is144A.Value : null;
+	// Date
+var maturityDate = Source.MaturityDate.HasValue ? Source.MaturityDate : null;
+var expirationDate = Source.ExpirationDate.HasValue ? Source.ExpirationDate : null;
+	// String
+var referenceIndex = !string.IsNullOrEmpty(Source.ReferenceIndex) ? Source.ReferenceIndex : &quot;&quot;;
+var loanFacilityName = !string.IsNullOrEmpty(Source.LoanFacilityName) ? Source.LoanFacilityName : &quot;&quot;;</p>
+<h1>Mark beginning of confirmation rules and indicate the Scenario Outline corresponding to each section</h1>
+<h1>We must align as much as possible SpecFlow and code</h1>
+<p>// Begin Configuration Rules
+// Corresponds to reqs and tests in Scenario Outline: XXYYZZ</p>
+<h1>In conditionals involving lookups, use the helper function of the desired class.</h1>
+<h1>Remember, Lookups class doesn't always match the name of the field (ex. SecurityCountryOfIncorporation =&gt; Countries)</h1>
+<h1>Code template</h1>
+<p>if (ftIOClass == FTIOClasses.EQ.ReferenceCode) {}
+if (securityCountryOfIncorporation == Countries.IE.ReferenceCode) {}</p>
+<h1>Mappings - for single input mapping, input of a mapping must be a string.</h1>
+<h1>assign result of Mapping to a new variable, then check Null on the variable to prevent error</h1>
+<h1>new variable will be a Mapping object, to get the value, you must access property of the result object</h1>
+<h1>Code template</h1>
+<p>var result = !string.isNullorEmpty(exchange) ? Mappings.ExchangeCodeToCountry.Transform(exchange) : null;
+countryOfListing = result != null ? result.Country : &quot;&quot;;</p>
+<h1>Conditionals with multiple arguments, use || and &amp;&amp; to combine conditions</h1>
+<h1>Code template</h1>
+<p>if (ftIOClass == FTIOClasses.CS.ReferenceCode || ftIOClass == FTIOClasses.FI.ReferenceCode) {}</p>
+<h1>Lookups - GetItemByID()</h1>
+<p>Lookups.XLookupClassX.GetItemById(XReferenceCodeX)</p>
+<h1>Null Checking</h1>
+<p>// Boolean
+Source.IsRemarketed.HasValue</p>
+<h1>Matching against arrays</h1>
+<h1>Code template</h1>
+<p>// Set the array
+string[] ftSecurityTypeArrayRule2 = {&quot;ADR&quot;, &quot;GDR&quot;, &quot;IDR&quot;, &quot;DPP&quot;};
+// check if contains
+if (ftSecurityTypeArrayRule2.Contains(ftSecurityType)) {}</p>
+<h1>Building up a long string made of multiple parts and variable length</h1>
+<h1>This is better than directly concatenating string because it avoids trailing seperators (ie. commas, spaces)</h1>
+<h1>Code template</h1>
+<p>// create an array that will hold all the potential parts, up to the maximum count of parts
+// initial a pointer to navigate the array
+string[] name_parts = new string[3];
+int i = 0;</p>
+<p>// add elements to the array according to rules and increment the pointer
+name_parts[i] = Source.Issuer.LongName;
+i++;</p>
+<p>// truncate the array according to the pointer, concatenate the array with desired seperator
+Array.Resize(ref name<em>parts, i);
+ftSecurityLegalName1 = string.Join(&quot;, &quot;, name</em>parts);</p>
+<h1>Formatting dates</h1>
+<h1>Code template</h1>
+<p>Source.MaturityDate.Value.Date.ToString(&quot;MM/dd/yyyy&quot;);</p>
+<h1>Formatting decimals to remove trailing or leading zeros</h1>
+<h1>Code template</h1>
+<p>// remove trailing zeros
+	name<em>parts[i] = Source.CouponRate.Value.ToString(&quot;G29&quot;);
+// remove first zero if it's less than 1
+if (Source.CouponRate.Value &lt; 1) {
+	name</em>parts[i] = name<em>parts[i].Substring(1, name</em>parts[i].Length - 1);
+}</p>
+<h1>Simple Rules</h1>
+<h1>1 to 1 with Lookup</h1>
+<p>// Corresponds to reqs and tests in PaymentRank: BBG.PAYMENT<em>RANK
+if (Source.DescriptiveInfo.PAYMENT</em>RANK == null)
+{
+	return null;
+}
+else
+	return Lookups.PaymentRanks.GetItemById(Source.DescriptiveInfo.PAYMENT_RANK.ToString());</p>
+<h1>1 to 1 with Mapping nd Lookup</h1>
+<p>// Declare and assign variables
+	// Lookups
+var ftSecurityType = Target.FTSecurityType != null ? Target.FTSecurityType.ReferenceCode : &quot;&quot;;
+	// Output
+var ftIOClass = &quot;&quot;;</p>
+<p>var result = !string.IsNullOrEmpty(ftSecurityType) ? Mappings.FTSecurityTypeToFTIOClass.Transform(ftSecurityType) : null;
+ftIOClass = result != null ? result.FTIOClass : &quot;&quot;;</p>
+<p>return Lookups.FTIOClasses.GetItemById(ftIOClass);</p>
+<h1>Run conditions -</h1>
+<p>// Don't use run conditions to validate data. Run condition should only reflect business
+// requirements that dictate a rule does not need to run. Better for the rule to rule and return null or existing value
+// that for the rule to not run at all without total confidence that it's not needed
+// Run condition considering more than the source source value of the current field must point to a spec flow requirement dictating this behavior
+// Don’t put complex rules in the run conditions, as they are supposed to be used as precalculation. They should be fast.</p>
+<p>// Using run conditions may speed up the process, as it can block a rule from running (important by complex rules).</p>
+<h1>Notation in comments</h1>
+<p>// #? Or //? Is comment tag for an open question
+// Comments your code !!! At minimum, provide comment pointing the the reqs/test/specflow that defines this logic</p>
+<h1>Tips for speeding up testing automation</h1>
+<p>// Run the specflow with just trigger conditions and placeholder values first to ensure that inputs and outputs are being read correctly before writing rule
+// Implemented SpecFlow is mandatory</p>
+<h1>Tips for creating robust test cases</h1>
+<p>// Add an all Null inputs test case for each Test Scenario</p>
+<h1>Order of the rules:</h1>
+<p>// 1. Keys should be normalizaed as first
+// 2. If a rule is dependant on another one, it should be lower in the normalization/derivation list.</p>
+<h1>Programming tips</h1>
+<p>// Avoid excessive usage of ProcessContext.
+// Avoid unnecessary usage of extension methods.
+// Remember that complex rules slow down the normalization/derivation.</p>
+<h1>Usings</h1>
+<p>// Remember that usings can be only normalized, never derived (underlying, issuer).
+// Remember there’s no selection rules for usings. Usings are never overriden. If it’s set to a non null value, it will stay like this ?
+// The validation rules for using should be done at the entity level (i.e. issuer should be validated in the validation rule for the whole instrument).
+// The normalization/derivation of components must be done as a child derivation of a parent class (example: ratings, schedules).</p>
+<h1>Cutting Floor</h1>
+<p>This best practice guide contains the following resources:
+A toolbox of sample code and solutions for frequently occurring scenarios
+	- This section will include common topics and example code templates of ideal configurations to help developers save time
+A quick overview of guiding principles for good configurations
+A set of configuration rule examples demonstrating the exec
+	- These walkthroughs will introduce our checklist of 7 key steps required to follow GAIN Studio standard best practices</p>
+<pre><code>Each Walkthrough is Arranged in Order of Progressing Complexity. These walkthroughs cover simple configuration rules but are meant to introduce best practice documentation, testing, and exception handling that is often neglected when writing configuration rules. Adopting these best practices are essential to creating maintainable, dependable and efficient code.
+</code></pre>
+
+<p>Outline
+Basic 1:1 Rule - Basic commenting and creating your first automated test
+	- Drag and drop rule configuration
+	- Generating a test case temple
+	- Running an automated test with test explorer
+Simple Conditional Logic from Requirements - Translating requirements into configuration rules and tests
+	- Interpreting and documenting a requirement properly
+	- Translating SpecFlow requirements to executable SpecFlow test scenarios
+	- Checking for execution errors in SpecFlow test scenarios and troubleshooting
+	- Writing simple configurations and proper association of rules to requirements
+Introducing Lookups - The correct way to use lookups
+	- Declaring and assigning variables for proper exception handling
+	- Best Practice for using Lookups
+Introducing Mappings - The correct way to use mappings
+	- Best Practice for using Mappings</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
