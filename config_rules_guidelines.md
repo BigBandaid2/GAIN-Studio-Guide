@@ -233,6 +233,77 @@ Common Failure Scenarios
 - No comments in the configuration
 	- Add a comment, no brainer
 
+\\ SpecFlow Has Enough Test Cases
+=========================
+Purpose
+-------
+Every SpecFlow should have enough cases to cover all reasonable scenarios
+
+PASS Example
+------------
+![](/tests.png)
+
+\\ Test Cases Run with No SpecFlow Blocking or Scripting Errors
+============================
+Purpose
+-------
+Before writing or updating a configuration rule, you can run the Specflow first to check for SpecFlow errors.
+- This ensures that the SpecFlow works in Test Explorer
+- A working SpecFlow means you can run tests as you configure
+- At the end of your configuration you don't have to debug SpecFlow errors and Configuration errors simultaenously
+
+PASS Example
+---------
+1. [Run feature tests]
+2. Right click a failed test and select 'Test Output'
+3. Check that all fields are appearing correctly and there are no run-time errors.
+4. Error should exisit only because expected and actual strings differ
+	- all others are SpecFlow errors
+	- also check that all required inputs and outputs are registering
+
+![](/testOutputGood2.png)
+
+\\ All Test Cases Pass
+======================
+Purpose
+-------
+The configuration cannot be considered DONE until it passes all Tests defined in the SpecFlow
+
+PASS Example
+----------
+- Check that all test cases pass, if not adjust the transformation
+- If a test fails because the test case has errors, comment out the test case or make adjustments. 
+
+![](/runTest.png)
+
+\\ Code is Dependable and Efficient
+=================
+Purpose
+------
+The configuration code should be dependable and resilient. Good configuration code should:
+
+- Correct for common sources or error
+- Manage empty and null values
+- Be short and compact as possible
+- Use efficient structures such as Mappings
+- Properly utilize Run conditions to avoid needless processing
+
+PASS Examples
+---------
+Examples and details are given in [GAIN Specific Coding Guidelines]
+
+\\ Four-eyes Check by Second Developer or BA
+=================
+Purpose
+-------
+To be completely DONE, all rules should be reviewed by another team member and approved
+
+PASS Example
+------------
+- After review, a comment should be made in the SpecFlow to indicate the date and team member providing review
+
+![](/specFlowWithComment.PNG)
+
 \ Extra Example Walkthroughs
 ============================
 Purpose
@@ -396,7 +467,7 @@ Contents
 - If...Else
 - Lookups
 
-\\ 1:1 Mapping with Lookup
+\\ 1:1 Transfer with Lookup
 ========================================
 Components
 ----------
@@ -404,7 +475,28 @@ Components
 - [Lookups]
 - [Null Checking]
 
-Best Practice Code Template
+Best Practice Code Template 1
+----------------
+```
+// Declare and assign variables
+   // String
+var countryOfRisk = Source.DescriptiveInfo != null && !string.IsNullOrEmpty(Source.DescriptiveInfo.CNTRY_OF_RISK) ? Source.DescriptiveInfo.CNTRY_OF_RISK : "";
+
+// Begin configuration rule
+if (!string.IsNullOrEmpty(countryOfRisk))
+{
+   return Lookups.Countries.GetItemById(countryOfRisk);
+}
+return null;
+```
+
+Explanation 1
+------------
+- DescriptiveInfo is null checked separately and before CNTRY_OF_RISK to prevent errors caused by invoking an empty - object
+- input from source is assigned to a local variable for easier handling
+- GetItemById() always runs on a string which has been assigned to a local variable, never a null
+
+Best Practice Code Template 2
 ----------------
 ```
 // Begin Rule
@@ -417,7 +509,7 @@ else
 	return null;
 ```
 
-Explanation
+Explanation 2
 -----------
 - Sub-group of the Source, 'DescriptiveInfo', is null-checked before trying to access it's properties
 - PAYMENT_RANK is string and checked using a string function
@@ -436,7 +528,9 @@ else
    return Lookups.PaymentRanks.GetItemById(Source.DescriptiveInfo.PAYMENT_RANK.ToString());
 ```
 
-\\ 1:1 Mapping with Mapping and Lookup
+
+
+\\ 1:1 Transfer with Mapping and Lookup
 ========================
 Components
 ----------
@@ -514,6 +608,20 @@ Assigning variables at the top has the following benefits:
 - 'Generate Test' can include all fields before configuration rule is complete
 - Variables can be organized by type for quick reference without leaving the configuration
 
+More Information
+----------
+```
+// Declare and assign variables
+   // String
+var countryOfRisk = Source.DescriptiveInfo != null && !string.IsNullOrEmpty(Source.DescriptiveInfo.CNTRY_OF_RISK) ? Source.DescriptiveInfo.CNTRY_OF_RISK : '';
+```
+In this example, country of risk comes from a connected level of the source called 'DescriptiveInfo'
+
+- To correctly prevent errors caused by empty values, we must first check that the connected level exists
+- Then check that the value that we are seeking exists
+- This two step check can be performed one time at the beginning of the rule
+- It is then only a single check when used later in the code.
+
 \\ Component - Comments
 =======================
 Best Practice Code Template
@@ -562,6 +670,39 @@ Explanation
 - This saves keystrokes when coding and saves a null-check on the Lookup
 - Remember, Lookups class doesn't always match the name of the field (ex. SecurityCountryOfIncorporation => Countries)
 
+Best Practice Code Template 2
+--------------
+```
+if (Target.FTIOClass == FTIOClasses.EQ || Target.FTIOClass == FTIOClasses.FU || Target.FTIOClass == FTIOClasses.OP)
+{
+   return Source.DescriptiveInfo != null && !string.IsNullOrEmpty(Source.DescriptiveInfo.TICKER) ? Source.DescriptiveInfo.TICKER : null;
+} 
+else
+{
+   return null;
+}
+```
+
+Sub Optimal Code 2
+----------
+```
+# Sub-Optimal Code Example
+if (Target.FTIOClass != null && Target.FTIOClass.ReferenceCode == "EQ" || Target.FTIOClass.ReferenceCode == "FU" || Target.FTIOClass.ReferenceCode == "OP")
+{
+   return Source.DescriptiveInfo != null && !string.IsNullOrEmpty(Source.DescriptiveInfo.TICKER) ? Source.DescriptiveInfo.TICKER : null;
+} 
+else
+{
+   return null;
+}
+```
+Explanation 2
+-----------
+- Saves keystrokes
+- Fewer transformations
+- Less opportunity for error
+- You are certain that you a using a valid lookup value
+
 \\ Component - Mappings
 =======================
 Best Practice Code Template
@@ -580,6 +721,46 @@ Explanation
 - Mapping saves you from writing long multi-part if statements or case-switch statements
 - Mappings can be reused between configurations
 - Shorter code, faster run-time execution
+
+More About Mappings
+-------------
+A mapping is basically a table that converts input data into an output value:
+
+- Input fields: minimum 1, no maximum
+- Output fields: minimum 1, no maximum
+- A table of many mapped values can exist centrally and be called upon whenever needed.
+
+An example of a situation to use mapping is to find the Country that an and exchange belongs in. (ie, NYSE -> US, Japan Stock Exchange -> JP, Deutche Borse -> DE)
+
+### To use an existing Mapping, use the Transform() function
+```
+Mappings.XMappingClassX.Transform(inputs)
+```
+Every time you use the mapping, you must first assign the result to a variable, and then check that the result exists.
+
+### Looking up Mappings
+To find the mappings, you can locate the navigation here:
+
+![](/mappings.png)
+
+For more information on Lookup, look here
+```
+// Declare and assign variables
+   // Output
+string resetFrequency = "N";
+var refixFreq = Source.FloatingRateInfo != null && Source.FloatingRateInfo.REFIX_FREQ.HasValue ? Source.FloatingRateInfo.REFIX_FREQ : null;
+
+// Corresponding test cases Scenario Outline: ResetFrequency: REFIX_FREQ via mapping
+if (refixFreq.HasValue)
+{
+   var ResetFrequencyMapped = Mappings.ResetFrequencyBbgToGainMapping.Transform(refixFreq);
+   if (ResetFrequencyMapped != null)
+   {
+      resetFrequency = ResetFrequencyMapped.ResetFrequency;
+   }
+}
+return Lookups.ResetFrequencies.GetItemById(resetFrequency);
+```
 
 \\ Component - Lookups: GetItemById
 =================================== 
