@@ -4,11 +4,11 @@ How to use this guide
 ---------------------
 This guide has three main parts:
 
-1. *Introduction* - A brief statement of purpose and some examples and DONE and NOT DONE configurations
+1. *Definition of Done* - A brief statement of purpose and some examples of DONE vs NOT DONE configurations
 2. *GAIN Best Practices Checklist* - Covers comments, documentation, and automated tests
-1. *GAIN Studio Coding Reference* - Templates and explanations for common rules types and scenarios
+3. *GAIN Studio Coding Reference* - Templates and explanations for common rules types and scenarios
 
-### Introduction
+### Definition of Done
 - We'll cover AIM Software's definition of a fully DONE configuration in GAIN Studio
 - We'll show examples comparing a good DONE configuration vs. a NOT DONE one
 
@@ -19,34 +19,34 @@ This guide has three main parts:
 - Templates for common scenarios that can be copied and reused
 - Comparisons to NOT DONE configurations and explanations
 
-\ Introduction
+\ Definition of Done
 ==============
 Goal: Establish the Definition of DONE
 --------------------------------------
 A configuration is truly DONE only when it is:
 
 - Clear and Easy to Understand
-- Fully Tested
+a- Fully Tested
 - Efficient
 
 ### Clear and Easy to Understand
-- Is the configuration must be understandable and maintainable for people other than the original author?
-- Does it include references to the original requirements that it is meant to satisfy?
-- Is the configuration and well commented to help others track the logic and choices made by the author?
+- Is the configuration understandable and maintainable for people other than the original author?
+- Does it include references to the original requirements (SpecFlow) that it is meant to satisfy?
+- Is the configuration well commented to help others track the logic and choices made by the author?
 
 ### Fully Tested
 - Has the configuration passed SpecFlow unit tests in GAIN Studio?
 - Are the tests comprehensive and include situations that are likely to cause errors?
 
 ### Efficient
-- Does the code benefit from reusable templates so that configurations can be written quickly
-- Does the code run efficiently so that it performs well over thousands of records
+- Does the code benefit from reusable templates so that configurations can be written quickly?
+- Does the code run efficiently so that it performs well over thousands of records?
 
 Done in the Context of GAIN Studio - Checklist
 ----------------------------------
 A clear, tested and efficient configuration in GAIN has the following minimum criteria:
 
-1. A single consolidated SpecFlow .feature file exists for this configuration
+1. A single consolidated SpecFlow .feature file exists for this configuration (
 1. The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow
 1. The SpecFlow is associated directly to the configuration via GAIN Studio
 1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
