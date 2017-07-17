@@ -4,20 +4,23 @@ How to use this guide
 ---------------------
 This guide has three main parts:
 
-1. *Definition of Done* - A brief statement of purpose and some examples of DONE vs NOT DONE configurations
-2. *GAIN Best Practices Checklist* - Covers comments, documentation, and automated tests
-3. *GAIN Studio Coding Reference* - Templates and explanations for common rules types and scenarios
-
-### Definition of Done
-- We'll cover AIM Software's definition of a fully DONE configuration in GAIN Studio
+### 1. Check list 'Definition of Done'
+- This is AIM Software's definition of a fully DONE configuration in GAIN Studio
+- You can use this checklist as 'crib-sheet'
 - We'll show examples comparing a good DONE configuration vs. a NOT DONE one
 
-### Best Practices Checklist
-- Non-technical checklist that can be followed to verify that the code is DONE
+### 2. Best Practices to reach 'Definition of Done'
+- This section details each steps to achieve 'Definition of Done'
 
-### GAIN Studio Coding Reference
-- Templates for common scenarios that can be copied and reused
-- Comparisons to NOT DONE configurations and explanations
+### 3. GAIN Studio Coding Reference
+- A lot of rules contains same code piece:
+   - if 
+   - Mapping
+   - ...
+- The best is to copy a pattern available in this section and adapt to your particular case
+- A best practice is to copy 
+This section provides templates for common coding ; you can copy and adapt
+- You are then sure to have good basis for your coding
 
 \ Definition of Done
 ==============
@@ -26,7 +29,7 @@ Goal: Establish the Definition of DONE
 A configuration is truly DONE only when it is:
 
 - Clear and Easy to Understand
-a- Fully Tested
+- Fully Tested
 - Efficient
 
 ### Clear and Easy to Understand
@@ -46,15 +49,20 @@ Done in the Context of GAIN Studio - Checklist
 ----------------------------------
 A clear, tested and efficient configuration in GAIN has the following minimum criteria:
 
-1. A single consolidated SpecFlow .feature file exists for this configuration (
+1. A single consolidated SpecFlow .feature file exists for this configuration (multiple SpecFlows must be exceptions)
+   SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file)
 1. The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow
-1. The SpecFlow is associated directly to the configuration via GAIN Studio
-1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
+   A comment details rule and how to read examples.A comment details rule and how to read examples.
 1. The SpecFlow contains sufficient test cases, including cases with missing data
-1. The test cases run in GAIN Studio with no SpecFlow scripting or blocking errors
+1. The SpecFlow is associated directly to the configuration via GAIN Studio
+   'Jump to test' opens  SpecFlows file.
+1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
 1. All test cases PASS
+     - No scripting/blocking errors
+     - No business errors
 1. The configuration code handles common sources of error [See Checklist of Common Errors]
 1. The configuration uses efficient methods such as Mapping to optimize execution speed
+   The code re-uses official templates as much as possible. 
 2. Configuration has been checked by a second team member
 
 \\ Example of a Configuration: BbgUniquId
@@ -62,9 +70,13 @@ A clear, tested and efficient configuration in GAIN has the following minimum cr
 DONE Configuration - Best Practice
 ----------------------
 - ![](/greenCheck.png) A single consolidated SpecFlow .feature file exists for this configuration
+
+SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file)
+HERE PICTURE JUMP TO TEST
+
 - ![](/greenCheck.png) The SpecFlow is associated directly to the configuration via GAIN Studio
 - ![](/greenCheck.png) The interpretation of the original business requirement is explicitly written in the SpecFlow
-
+A comment details rule and how to read examples.
 	![](/specFlowWithComment.PNG)
 - ![](/greenCheck.png) The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
 
@@ -103,11 +115,11 @@ NOT DONE Configuration
 	![](/scriptingError.PNG)
 - ![](/greenCheck.png) Configuration code is clean is efficient
 
-\ Best Practices Checklist
+\ Best Practices to reach 'Definition of Done'
 =====================================
 Checklist Overview
 -------------------
-This section will provide a non-technical guide for configurations based on a checklist
+This section details each step to pass 'Definition of Done'
 
 - Every configuration should pass the checklist before sign-off on the configuration rule
 - A significant focus of this checklist will be documentation and preparing automated tests
@@ -125,15 +137,20 @@ Each checklist item will contain
 Checklist Items
 ---------------
 
-1. A single consolidated SpecFlow .feature file exists for this configuration
-1. The SpecFlow is associated directly to the configuration via GAIN Studio
+1. A single consolidated SpecFlow .feature file exists for this configuration (multiple SpecFlows must be exceptions)
+   SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file)
 1. The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow
-1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
+   A comment details rule and how to read examples.A comment details rule and how to read examples.
 1. The SpecFlow contains sufficient test cases, including cases with missing data
-1. The test cases run in GAIN Studio with no SpecFlow scripting or blocking errors
+1. The SpecFlow is associated directly to the configuration via GAIN Studio
+   'Jump to test' opens  SpecFlows file.
+1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
 1. All test cases PASS
-1. The configuration code controls for common sources of error
-1. The configuration uses efficient methods such as Mapping to optomize execution speed
+     - No scripting/blocking errors
+     - No business errors
+1. The configuration code handles common sources of error [See Checklist of Common Errors]
+1. The configuration uses efficient methods such as Mapping to optimize execution speed
+   The code re-uses official templates as much as possible. 
 2. Configuration has been checked by a second team member
 
 
@@ -141,7 +158,8 @@ Checklist Items
 ==============================================
 Purpose
 -------
-If there is more than one .feature file for a single configuration, there's a danger of confusion and conflict. No file and No tests or requirements is also bad. 
+If there is more than one .feature file for a single configuration, there's a danger of confusion and conflict. 
+No file and No tests or requirements is also bad. 
 
 PASS Example
 ------------
@@ -192,7 +210,8 @@ Common Failure Scenarios
 =============================================
 Purpose
 -------
-In GAIN, Specflows are the main document for communicating requirements between business and developers. Lack of explicit requirements cause:
+In GAIN, Specflows are the main document for communicating requirements between business and developers. 
+Lack of explicit requirements cause:
 - Potential confusion and incorrect configuration
 - Difficulty for the developer to understand and implement
 - Difficulty for future people to understand the original purpose of the configuration and review or revise
@@ -243,8 +262,26 @@ PASS Example
 ------------
 ![](/tests.png)
 
-\\ Test Cases Run with No SpecFlow Blocking or Scripting Errors
-============================
+
+![](/testOutputGood2.png)
+
+
+\\ All Test Cases Pass
+======================
+Purpose
+-------
+The configuration cannot be considered DONE until it passes all Tests defined in the SpecFlow
+
+PASS Example
+----------
+- Check that all test cases pass, if not adjust the transformation
+- If a test fails because the test case has errors, comment out the test case or make adjustments. 
+
+![](/runTest.png)
+
+ 
+1. No scripting/blocking errors
+
 Purpose
 -------
 Before writing or updating a configuration rule, you can run the Specflow first to check for SpecFlow errors.
@@ -260,21 +297,11 @@ PASS Example
 4. Error should exisit only because expected and actual strings differ
 	- all others are SpecFlow errors
 	- also check that all required inputs and outputs are registering
+   
 
-![](/testOutputGood2.png)
+2. No business errors
+     
 
-\\ All Test Cases Pass
-======================
-Purpose
--------
-The configuration cannot be considered DONE until it passes all Tests defined in the SpecFlow
-
-PASS Example
-----------
-- Check that all test cases pass, if not adjust the transformation
-- If a test fails because the test case has errors, comment out the test case or make adjustments. 
-
-![](/runTest.png)
 
 \\ Code is Dependable and Efficient
 =================
