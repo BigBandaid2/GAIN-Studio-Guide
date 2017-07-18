@@ -8,20 +8,24 @@ This guide has three main parts:
 - This is AIM Software's definition of a fully DONE configuration in GAIN Studio
 - You can use this checklist as 'crib-sheet'
 - We'll show examples comparing a good DONE configuration vs. a NOT DONE one
+- [link](#-definition-of-done)
 
 ### 2. Best Practices to reach 'Definition of Done'
 - This section details each steps to achieve 'Definition of Done'
+- [link](#-best-practices-to-reach-definition-of-done)
 
-### 2. Best practices to structure a transformation
-- This section gives advices to structure a transformation (derivation instrument, normalization Bloomberg instrument ...).
+### 3. Best practices to structure a transformation
+- This section gives advices to structure a transformation (derivation instrument, normalization Bloomberg instrument ...)
+- [link](#-best-practices-to-structure-a-transformation)
 
-### 3. GAIN Studio Coding Reference
+### 4. GAIN Studio Coding Reference
 - A lot of rules contains same code piece:
    - if 
    - Mapping
    - ...
 - The best is to copy a pattern available in this section and adapt to your particular case
 - You are then sure to have good basis for your coding
+- [link](#-gain-specific-coding-guidelines)
 
 \ Definition of Done
 ==============
@@ -51,20 +55,21 @@ Done in the Context of GAIN Studio - Checklist
 A clear, tested and efficient configuration in GAIN has the following minimum criteria:
 
 1. A single consolidated SpecFlow .feature file exists for this configuration (multiple SpecFlows must be exceptions)
-   SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file)
+   SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file) [link](#-only-a-single-specflow-file-should-exist-in-test-folders)
 1. The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow
-   A comment details rule and how to read examples.
-1. The SpecFlow contains sufficient test cases, including cases with missing data (all inputs are null).
-1. The SpecFlow is associated directly to the configuration via GAIN Studio
-   'Jump to test' opens  SpecFlows file.
-1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
-1. All test cases PASS
+   A comment details rule and how to read examples.A comment details rule and how to read examples. [link](#-business-requirement-is-explicitly-written-in-the-specflow)
+1. The SpecFlow contains sufficient test cases, including cases with missing data [link](#-specflow-has-enough-test-cases)
+1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference [link](#-configuration-code-must-have-comments-pointing-to-specflow-scenario-outlines)
+1. All test cases PASS [link](#-all-test-cases-pass)
      - No scripting/blocking errors
      - No business errors
-1. The configuration code handles common sources of error [See Checklist of Common Errors]
-1. The configuration uses efficient methods such as Mapping to optimize execution speed
-   The code re-uses official templates as much as possible. 
-2. Configuration has been checked by a second team member
+1. The configuration code re-uses official templates as much as possible and handles common sources of error [link](#-gain-specific-coding-guidelines)
+1. The configuration uses efficient methods to optimize execution speed [link](#-best-practices-to-structure-a-transformation)
+2. Configuration has been checked by a second team member [link](#-four-eyes-check-by-second-developer-or-ba)
+
+DONE configuration vs. NOT DONE
+-------------------------
+[Example](#-example-of-a-configuration-bbguniquid)
 
 \\ Example of a Configuration: BbgUniquId
 ======================================
@@ -139,30 +144,34 @@ Checklist Items
 ---------------
 
 1. A single consolidated SpecFlow .feature file exists for this configuration (multiple SpecFlows must be exceptions)
-   SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file)
+   SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file) [link](#-only-a-single-specflow-file-should-exist-in-test-folders)
 1. The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow
-   A comment details rule and how to read examples.A comment details rule and how to read examples.
-1. The SpecFlow contains sufficient test cases, including cases with missing data
-1. The SpecFlow is associated directly to the configuration via GAIN Studio
-   'Jump to test' opens  SpecFlows file.
-1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
-1. All test cases PASS
+   A comment details rule and how to read examples.A comment details rule and how to read examples. [link](#-business-requirement-is-explicitly-written-in-the-specflow)
+1. The SpecFlow contains sufficient test cases, including cases with missing data [link](#-specflow-has-enough-test-cases)
+1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference [link](#-configuration-code-must-have-comments-pointing-to-specflow-scenario-outlines)
+1. All test cases PASS [link](#-all-test-cases-pass)
      - No scripting/blocking errors
      - No business errors
-1. The configuration code handles common sources of error [See Checklist of Common Errors]
-1. The configuration uses efficient methods such as Mapping to optimize execution speed
-   The code re-uses official templates as much as possible. 
-2. Configuration has been checked by a second team member
+1. The configuration code re-uses official templates as much as possible and handles common sources of error [link](#-gain-specific-coding-guidelines)
+1. The configuration uses efficient methods to optimize execution speed [link](#-best-practices-to-structure-a-transformation)
+2. Configuration has been checked by a second team member [link](#-four-eyes-check-by-second-developer-or-ba)
 
 
 \\ Only A Single SpecFlow File Should Exist in Test Folders
 ==============================================
 Purpose
 -------
+### Part 1
 If there is more than one .feature file for a single configuration, there's a danger of confusion and conflict. 
 No file and No tests or requirements is also bad. 
 
-PASS Example
+### Part 2
+If the SpecFlow file exists but is not associated, you have two problems:
+
+- You can't jump quickly from the configuration rule to the SpecFlow
+- The SpecFlow may not function correctly and may be imporperly tagged
+
+PASS Example - Part 1
 ------------
 1. Navigate to Text Explorer
 2. Type the name of the configuration's model field into the 'Filter' bar
@@ -173,20 +182,12 @@ PASS Example
 Common Failure Scenarios
 ------------------------
 - No SpecFlows Exist 
-	- **Solution:** [generate a specflow]
+	- **Solution:** [Feature tests\Create feature test]
 - More than one test exist 
 	- **Solution:** [consolidate specflows]
 
-\\ The SpecFlow and Configuration Rule Must Be Associated
-=====================================================
-Purpose
--------
-If the SpecFlow file exists but is not associated, you have two problems:
 
-- You can't jump quickly from the configuration rule to the SpecFlow
-- The SpecFlow may not function correctly and may be imporperly tagged
-
-PASS Example
+PASS Example - Part 2
 ------------
 1. Right-click on field of configuraiton
 2. click 'Jump to Test'
@@ -261,7 +262,7 @@ Every SpecFlow should have enough cases to cover all reasonable scenarios
 
 PASS Example
 ------------
-![](/tests.png)
+![](/tests.PNG)
 
 
 ![](/testOutputGood2.png)
