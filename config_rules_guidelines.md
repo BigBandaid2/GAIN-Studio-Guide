@@ -12,14 +12,15 @@ This guide has three main parts:
 ### 2. Best Practices to reach 'Definition of Done'
 - This section details each steps to achieve 'Definition of Done'
 
+### 2. Best practices to structure a transformation
+- This section gives advices to structure a transformation (derivation instrument, normalization Bloomberg instrument ...).
+
 ### 3. GAIN Studio Coding Reference
 - A lot of rules contains same code piece:
    - if 
    - Mapping
    - ...
 - The best is to copy a pattern available in this section and adapt to your particular case
-- A best practice is to copy 
-This section provides templates for common coding ; you can copy and adapt
 - You are then sure to have good basis for your coding
 
 \ Definition of Done
@@ -52,8 +53,8 @@ A clear, tested and efficient configuration in GAIN has the following minimum cr
 1. A single consolidated SpecFlow .feature file exists for this configuration (multiple SpecFlows must be exceptions)
    SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file)
 1. The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow
-   A comment details rule and how to read examples.A comment details rule and how to read examples.
-1. The SpecFlow contains sufficient test cases, including cases with missing data
+   A comment details rule and how to read examples.
+1. The SpecFlow contains sufficient test cases, including cases with missing data (all inputs are null).
 1. The SpecFlow is associated directly to the configuration via GAIN Studio
    'Jump to test' opens  SpecFlows file.
 1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference
@@ -466,16 +467,73 @@ else
    return idIsin;
 ```
 
+\ Best practices to structure a transformation
+=================================
+
+MARTIAL
+ - I would set these tips in a dedicated section (distinct from coding templates/tips)
+ - I would set this section before section coding tips
+
+
+This section provides generic advices on how to organize your transformation (InstrumentDerivation, Bloomberg normalization, ...).
+The next section provides guidelines on how to best code each rule.
+
+
+\\ Run conditions
+==========
+Explanation
+---------- 
+- Don't use run conditions to validate data. Run condition should only reflect business
+- requirements that dictate a rule does not need to run. Better for the rule to rule and return null or existing value
+- that for the rule to not run at all without total confidence that it's not needed
+- Run condition considering more than the source source value of the current field must point to a spec flow requirement dictating this behavior
+- Don’t put complex rules in the run conditions, as they are supposed to be used as precalculation. They should be fast.
+- Using run conditions may speed up the process, as it can block a rule from running (important by complex rules).
+
+\\ Order of the Rules
+=====================
+Explanation
+-----------
+- Keys should be normalizaed as first
+- If a rule is dependant on another one, it should be lower in the normalization/derivation list.
+
+\\ Miscellaneous Tips
+=====================
+Explanation
+-----------
+- Avoid excessive usage of ProcessContext.
+- Avoid unnecessary usage of extension methods.
+- Remember that complex rules slow down the normalization/derivation.
+
+\\ Usings
+=========
+Explanation
+---------
+- Remember that usings can be only normalized, never derived (underlying, issuer).
+- Remember there’s no selection rules for usings. Usings are never overriden. If it’s set to a non null value, it will stay like this ?
+- The validation rules for using should be done at the entity level (i.e. issuer should be validated in the validation rule for the whole instrument).
+- The normalization/derivation of components must be done as a child derivation of a parent class (example: ratings, schedules).
+
 \ GAIN Specific Coding Guidelines
 =================================
 Guideline Structure
 -------------------
-Each page in this section will cover a common scenario. Each page contains:
 
+A lot of rules contains same code piece:
+   - if 
+   - Mapping
+   - ...
+
+The best practice is to copy a pattern available in this section and adapt to your particular case.
+You are then sure to have good basis for your coding.
+
+Each page in this section will cover a common scenario. 
+Each page contains:
 - A code template or example of Best Practice
 - Explanation for the recommended method
  
-This section will assume basic familiarity with programming terminology and concepts. Beyond this three part structure, further reading and explaination for the feature will refer to the core GAIN Studio guide documentation.
+This section will assume basic familiarity with programming terminology and concepts. 
+Beyond this three part structure, further reading and explaination for the feature will refer to the core GAIN Studio guide documentation.
 
 Focus
 -----
@@ -487,7 +545,7 @@ This section focues on:
 Contents
 ---------------
 ### Complete Rules
-- 1:1 Mapping With Lookup
+- 1:1 Transformation With Lookup
 
 ### Components and Concepts
 - Assigning Variables for easier use and null-checking
@@ -496,6 +554,10 @@ Contents
 
 \\ 1:1 Transfer with Lookup
 ========================================
+MARTIAL: 
+ - Sorry i don t understand what tranfer means here
+ - For each rule you must give context: situation and target -> will help a lot to understand
+
 Components
 ----------
 - [If...Else]
@@ -504,6 +566,13 @@ Components
 
 Best Practice Code Template 1
 ----------------
+
+Context:
+- Silver Copy field CountryOfRisk is associated to lookup Country
+- Rule 
+   - IF SC.CountryOfRisk IsNoNull THEN SC.CountryOfRisk = BBG.CNTRY_OF_RISK (no transformation)
+   - ELSE SC.CountryOfRisk = Null
+
 ```
 // Declare and assign variables
    // String
@@ -520,8 +589,9 @@ return null;
 Explanation 1
 ------------
 - DescriptiveInfo is null checked separately and before CNTRY_OF_RISK to prevent errors caused by invoking an empty - object
-- input from source is assigned to a local variable for easier handling
+- Input from source is assigned to a local variable for easier handling
 - GetItemById() always runs on a string which has been assigned to a local variable, never a null
+- GetItemById requires lookup names in plural: Lookups.Countries.GetItemById (how to better express?)
 
 Best Practice Code Template 2
 ----------------
@@ -536,6 +606,7 @@ else
 	return null;
 ```
 
+MARTIAL: i don t see added value compared to example 1, this is same thing no?
 Explanation 2
 -----------
 - Sub-group of the Source, 'DescriptiveInfo', is null-checked before trying to access it's properties
@@ -569,6 +640,14 @@ Components
 
 Best Practice Code Template
 ----------------
+
+Context:
+- Candidate field FTSecurityType is associated to lookup FTSecurityType
+- Candidate field FTIOClass is associated to lookup FTIOClasses
+- Rule: FTIOClass is equal to ouput of mapping FTSecurityTypeToFTIOClass (FTSecurityType)
+ 
+
+
 ```
 // Declare and assign variables
    // Lookups
@@ -598,6 +677,12 @@ Explanation
 =====================
 Best Practice Code Template
 ---------------------------
+
+
+Context:
+- Rule is complex, integrate a lot variables
+ 
+ 
 ```
 // Declare and assign variables
 	// Output
@@ -653,10 +738,22 @@ In this example, country of risk comes from a connected level of the source call
 =======================
 Best Practice Code Template
 ---------------------------
+
+Context:
+- You must implement a rule specified in SpecFlow
+- Each part of code refers to a specific scenario
+
 ```
+ 
 // Begin Configuration Rules
 // Corresponds to reqs and tests in Scenario Outline: XXYYZZ
-```
+if (...
+...
+
+// Corresponds to reqs and tests in Scenario Outline: ZZWWXX
+if (...
+...
+
 
 Explanation
 -----------
@@ -734,6 +831,10 @@ Explanation 2
 =======================
 Best Practice Code Template
 ---------------------------
+
+Context:
+- You must use ouput of mapping ExchangeCodeToCountry, input field Exchange
+
 ```
 // exchange is a string assigned earlier
 var result = !string.isNullorEmpty(exchange) ? Mappings.ExchangeCodeToCountry.Transform(exchange) : null;
@@ -743,8 +844,9 @@ countryOfListing = result != null ? result.Country : "";
 Explanation
 -----------
 - Mappings: for single input mapping, input of a mapping must be a string.
-- assign result of Mapping to a new variable, then check Null on the variable to prevent error
-- new variable will be a Mapping object, to get the value, you must access property of the result object
+- Assign result of Mapping to a new variable, then check Null on the variable to prevent error
+- New variable will be a Mapping object, to get the value, you must access property of the result object
+- You must always specifies the ouput field you want from mapping (result.Country), even if mapping has only 1 output field
 - Mapping saves you from writing long multi-part if statements or case-switch statements
 - Mappings can be reused between configurations
 - Shorter code, faster run-time execution
@@ -808,6 +910,10 @@ Explanation
 ============================
 Best Practice Code Template
 ---------------------------
+
+Context
+- 
+
 ```
 	// Lookups
 var exchange = Source.Exchange != null ? Source.Exchange.ReferenceCode : "";
@@ -837,6 +943,9 @@ Explanation
 ==========================
 Best Practice Code Template
 ---------------------------
+Context
+- You must determine if SecurityType of instrument is part of a list of 4 values
+
 ```
 // Set the array
 string[] ftSecurityTypeArrayRule2 = {"ADR", "GDR", "IDR", "DPP"};
@@ -876,6 +985,8 @@ Explanation
 \\ Formatting: Dates and Decimals
 =====
 Best Practice Code Template: Dates
+Context
+ - You want to convert a date field (MaturityDate) into a string, format Month/Day/Year
 ---------------------------
 ```
 Source.MaturityDate.Value.Date.ToString("MM/dd/yyyy");
@@ -891,38 +1002,3 @@ if (Source.CouponRate.Value < 1) {
 	name_parts[i] = name_parts[i].Substring(1, name_parts[i].Length - 1);
 }
 ```
-
-\\ Run conditions
-==========
-Explanation
----------- 
-- Don't use run conditions to validate data. Run condition should only reflect business
-- requirements that dictate a rule does not need to run. Better for the rule to rule and return null or existing value
-- that for the rule to not run at all without total confidence that it's not needed
-- Run condition considering more than the source source value of the current field must point to a spec flow requirement dictating this behavior
-- Don’t put complex rules in the run conditions, as they are supposed to be used as precalculation. They should be fast.
-- Using run conditions may speed up the process, as it can block a rule from running (important by complex rules).
-
-\\ Order of the Rules
-=====================
-Explanation
------------
-- Keys should be normalizaed as first
-- If a rule is dependant on another one, it should be lower in the normalization/derivation list.
-
-\\ Miscellaneous Tips
-=====================
-Explanation
------------
-- Avoid excessive usage of ProcessContext.
-- Avoid unnecessary usage of extension methods.
-- Remember that complex rules slow down the normalization/derivation.
-
-\\ Usings
-=========
-Explanation
----------
-- Remember that usings can be only normalized, never derived (underlying, issuer).
-- Remember there’s no selection rules for usings. Usings are never overriden. If it’s set to a non null value, it will stay like this ?
-- The validation rules for using should be done at the entity level (i.e. issuer should be validated in the validation rule for the whole instrument).
-- The normalization/derivation of components must be done as a child derivation of a parent class (example: ratings, schedules).
