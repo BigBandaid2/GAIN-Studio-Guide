@@ -20,9 +20,9 @@ This guide has three main parts:
 
 ### 4. GAIN Studio Coding Reference
 - A lot of rules contains same code piece:
-   - if 
+   - If... Else
    - Mapping
-   - ...
+   - Lookups, etc.
 - The best is to copy a pattern available in this section and adapt to your particular case
 - You are then sure to have good basis for your coding
 - [link](#-gain-specific-coding-guidelines)
@@ -54,16 +54,18 @@ Done in the Context of GAIN Studio - Checklist
 ----------------------------------
 A clear, tested and efficient configuration in GAIN has the following minimum criteria:
 
-1. A single consolidated SpecFlow .feature file exists for this configuration (multiple SpecFlows must be exceptions)
-   SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file) [link](#-only-a-single-specflow-file-should-exist-in-test-folders)
-1. The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow
-   A comment details rule and how to read examples.A comment details rule and how to read examples. [link](#-business-requirement-is-explicitly-written-in-the-specflow)
+1. A single consolidated SpecFlow .feature file exists for this configuration [link](#-only-a-single-specflow-file-should-exist-in-test-folders)
+	- multiple SpecFlows must be exceptions
+	- SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file) 
+1. The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow [link](#-business-requirement-is-explicitly-written-in-the-specflow)
+	- A comment details rule and how to read examples 
 1. The SpecFlow contains sufficient test cases, including cases with missing data [link](#-specflow-has-enough-test-cases)
 1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference [link](#-configuration-code-must-have-comments-pointing-to-specflow-scenario-outlines)
 1. All test cases PASS [link](#-all-test-cases-pass)
-     - No scripting/blocking errors
-     - No business errors
-1. The configuration code re-uses official templates as much as possible and handles common sources of error [link](#-gain-specific-coding-guidelines)
+    - No scripting/blocking errors
+    - No business errors
+1. The configuration code handles common sources of error [link](#-gain-specific-coding-guidelines)
+	- Config re-uses official templates as much as possible
 1. The configuration uses efficient methods to optimize execution speed [link](#-best-practices-to-structure-a-transformation)
 2. Configuration has been checked by a second team member [link](#-four-eyes-check-by-second-developer-or-ba)
 
@@ -142,20 +144,20 @@ Each checklist item will contain
 
 Checklist Items
 ---------------
-
-1. A single consolidated SpecFlow .feature file exists for this configuration (multiple SpecFlows must be exceptions)
-   SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file) [link](#-only-a-single-specflow-file-should-exist-in-test-folders)
-1. The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow
-   A comment details rule and how to read examples.A comment details rule and how to read examples. [link](#-business-requirement-is-explicitly-written-in-the-specflow)
+1. A single consolidated SpecFlow .feature file exists for this configuration [link](#-only-a-single-specflow-file-should-exist-in-test-folders)
+	- multiple SpecFlows must be exceptions
+	- SpecFlow must be at right place (rule 'Jump to test' opens  SpecFlows file) 
+1. The interpretation of the original business requirement is explicitly written and reviewed in the SpecFlow [link](#-business-requirement-is-explicitly-written-in-the-specflow)
+	- A comment details rule and how to read examples 
 1. The SpecFlow contains sufficient test cases, including cases with missing data [link](#-specflow-has-enough-test-cases)
 1. The configuration has comments pointing to corresponding sections of the the SpecFlow for reference [link](#-configuration-code-must-have-comments-pointing-to-specflow-scenario-outlines)
 1. All test cases PASS [link](#-all-test-cases-pass)
-     - No scripting/blocking errors
-     - No business errors
-1. The configuration code re-uses official templates as much as possible and handles common sources of error [link](#-gain-specific-coding-guidelines)
+    - No scripting/blocking errors
+    - No business errors
+1. The configuration code handles common sources of error [link](#-gain-specific-coding-guidelines)
+	- Config re-uses official templates as much as possible
 1. The configuration uses efficient methods to optimize execution speed [link](#-best-practices-to-structure-a-transformation)
 2. Configuration has been checked by a second team member [link](#-four-eyes-check-by-second-developer-or-ba)
-
 
 \\ Only A Single SpecFlow File Should Exist in Test Folders
 ==============================================
@@ -184,8 +186,7 @@ Common Failure Scenarios
 - No SpecFlows Exist 
 	- **Solution:** [Feature tests\Create feature test]
 - More than one test exist 
-	- **Solution:** [consolidate specflows]
-
+	- **Solution:** [Consolidate Specflows]
 
 PASS Example - Part 2
 ------------
@@ -198,7 +199,7 @@ PASS Example - Part 2
 Common Failure Scenarios
 ------------------------
 - Could not find test because no test exists
-	- **Solution:** [generate a SpecFlow]
+	- **Solution:** [Feature tests\Create feature test]
 	- ![](/couldNotFind.png)
 - SpecFlow file exists, but is not associated	
 	- **Solution:** Generate a specflow
@@ -293,17 +294,13 @@ Before writing or updating a configuration rule, you can run the Specflow first 
 
 PASS Example
 ---------
-1. [Run feature tests]
+1. [Feature tests\Run feature test]
 2. Right click a failed test and select 'Test Output'
 3. Check that all fields are appearing correctly and there are no run-time errors.
 4. Error should exisit only because expected and actual strings differ
 	- all others are SpecFlow errors
 	- also check that all required inputs and outputs are registering
-   
-
 2. No business errors
-     
-
 
 \\ Code is Dependable and Efficient
 =================
@@ -468,17 +465,41 @@ else
    return idIsin;
 ```
 
+\\ Walkthrough 4 - Consolidating SpecFlows
+=============
+Purpose
+-------
+If there are multiple SpecFlows, then they must be consolidated into one based on the generated template
+
+- Generated template will have the correct tags
+- Test cases consolidated into the generated template are less likely to have scripting issues
+
+Walkthrough
+-----------
+### Step 1 - Translate Requirements SpecFlow to the Generated Automated SpecFlow
+
+- Move the header up to Scenario Outline and interpreted explanation, above 'Given data...' line from requirement SpecFlow to automated SpecFlow
+	- This retains the generated fields and prevents automation errors from misspellings, etc.
+	- Remove Process Context inputs if not used
+
+![](/copyTest.png)
+
+### Step 2 - Copy/Paste the Test Case lines (keep the generate column headings) and realign the data columns
+
+	- This prevents the test case field headings from becoming misaligned with the expected inputs
+	- Care must be taken the align the test data with the correct headings
+	- At the end, delete the last pipe in any line and type '|' again to activate auto-formatting the straighten columns
+	
 \ Best practices to structure a transformation
 =================================
-
-MARTIAL
- - I would set these tips in a dedicated section (distinct from coding templates/tips)
- - I would set this section before section coding tips
-
-
 This section provides generic advices on how to organize your transformation (InstrumentDerivation, Bloomberg normalization, ...).
-The next section provides guidelines on how to best code each rule.
 
+- Run Conditions
+- Order of Rules
+- Usings
+- Miscellaneous Tips
+
+The following section provides guidelines on how to best code each rule.
 
 \\ Run conditions
 ==========
@@ -521,20 +542,18 @@ Guideline Structure
 -------------------
 
 A lot of rules contains same code piece:
-   - if 
+   - If... Else
    - Mapping
-   - ...
+   - Lookups, etc
 
 The best practice is to copy a pattern available in this section and adapt to your particular case.
-You are then sure to have good basis for your coding.
+You are then sure to have good basis for your coding. Each page in this section will cover a common scenario. 
 
-Each page in this section will cover a common scenario. 
 Each page contains:
 - A code template or example of Best Practice
 - Explanation for the recommended method
  
-This section will assume basic familiarity with programming terminology and concepts. 
-Beyond this three part structure, further reading and explaination for the feature will refer to the core GAIN Studio guide documentation.
+This section will assume basic familiarity with programming terminology and concepts. Beyond this three part structure, further reading and explaination for the feature will refer to the core GAIN Studio guide documentation.
 
 Focus
 -----
@@ -547,18 +566,15 @@ Contents
 ---------------
 ### Complete Rules
 - 1:1 Transformation With Lookup
+- 1:1 Transformation with Mapping and Lookup
 
-### Components and Concepts
+### Code Pieces and Concepts
 - Assigning Variables for easier use and null-checking
 - If...Else
 - Lookups
 
-\\ 1:1 Transfer with Lookup
+\\ 1:1 Transformation with Lookup
 ========================================
-MARTIAL: 
- - Sorry i don t understand what tranfer means here
- - For each rule you must give context: situation and target -> will help a lot to understand
-
 Components
 ----------
 - [If...Else]
@@ -607,7 +623,6 @@ else
 	return null;
 ```
 
-MARTIAL: i don t see added value compared to example 1, this is same thing no?
 Explanation 2
 -----------
 - Sub-group of the Source, 'DescriptiveInfo', is null-checked before trying to access it's properties
@@ -629,7 +644,7 @@ else
 
 
 
-\\ 1:1 Transfer with Mapping and Lookup
+\\ 1:1 Transformation with Mapping and Lookup
 ========================
 Components
 ----------
@@ -674,7 +689,7 @@ Explanation
 - 'result' is null check before accesssing its property
 - Comments noting Test Scenarios in SpecFlow
 
-\\ Component - Assigning Variables
+\\ Assigning Variables
 =====================
 Best Practice Code Template
 ---------------------------
@@ -748,13 +763,15 @@ Context:
  
 // Begin Configuration Rules
 // Corresponds to reqs and tests in Scenario Outline: XXYYZZ
-if (...
-...
+if (...) {
+	// some execution
+}
 
 // Corresponds to reqs and tests in Scenario Outline: ZZWWXX
-if (...
-...
-
+if (...) {
+	// some execution
+}
+```
 
 Explanation
 -----------
