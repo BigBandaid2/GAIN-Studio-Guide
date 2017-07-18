@@ -282,8 +282,7 @@ PASS Example
 
 ![](/runTest.png)
 
- 
-1. No scripting/blocking errors
+1. If the Spec Flow has scripting/blocking errors. 
 
 Purpose
 -------
