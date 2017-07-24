@@ -1019,3 +1019,34 @@ if (Source.CouponRate.Value < 1) {
 	name_parts[i] = name_parts[i].Substring(1, name_parts[i].Length - 1);
 }
 ```
+
+More Notes
+===========
+Plausibility must not return anything if no alert, not return null
+Mapping table must have capital names for inputs columns
+
+Plausibility 5%
+---------------
+// variation margin between Candidate & Golden Copy above 5%
+
+// declare and assign variables
+	// decimal
+var sharesOutstanding = Target.SharesOutstanding;
+var gcSharesOutstanding = GoldenCopy != null ? GoldenCopy.SharesOutstanding : null;
+
+// Begin Rule
+	// tests and reqs in Scenario Outline: SharesOutstanding: plausibility exception condition "variation margin between Candidate & Golden Copy above 5%"
+if(gcSharesOutstanding.HasValue && sharesOutstanding.HasValue)
+{
+	decimal Threshold = Decimal.Divide(5, 100);//5% Threshold
+	decimal Delta = Math.Abs((decimal)gcSharesOutstanding - (decimal)sharesOutstanding);
+	decimal PercentValue = Decimal.Multiply((decimal)gcSharesOutstanding,Threshold);
+	if ( Delta > PercentValue)
+	{
+		return "Warning: Difference between Candidate and Golden Copy is more than 5%";
+	}
+}
+else
+	return null;
+
+@ignore to comment out a test scenario
